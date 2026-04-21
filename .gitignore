@@ -9,3 +9,5 @@ nf-ds
 nf-ds.bin
 nf-ds.tar
 .cache
+.claude
+tsconfig.tsbuildinfo

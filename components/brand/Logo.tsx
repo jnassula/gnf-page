@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { asset } from "@/lib/assetPath";
 
 /**
  * Logo Grupo Nossa Farmácia — SVG inline, vectorial.
@@ -117,10 +118,10 @@ function resolveLockupSrc(
   theme: LogoTheme
 ): string {
   const base = variant === "full" ? "/brand/logo-full" : "/brand/logo-stacked";
-  if (theme === "dark") return `${base}-dark.svg`;
-  if (theme === "light") return `${base}.svg`;
+  if (theme === "dark") return asset(`${base}-dark.svg`);
+  if (theme === "light") return asset(`${base}.svg`);
   // auto: cor por defeito (light context); dark mode via <picture> no futuro.
-  return `${base}.svg`;
+  return asset(`${base}.svg`);
 }
 
 /**

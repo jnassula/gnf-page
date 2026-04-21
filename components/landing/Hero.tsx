@@ -11,6 +11,7 @@ import {
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LogoMark } from "@/components/brand/Logo";
+import { asset } from "@/lib/assetPath";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -27,7 +28,8 @@ export interface HeroProps {
   assetBase?: string;
 }
 
-export function Hero({ assetBase = "/hero" }: HeroProps = {}) {
+export function Hero({ assetBase: assetBaseProp = "/hero" }: HeroProps = {}) {
+  const assetBase = asset(assetBaseProp);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const [playVideo, setPlayVideo] = React.useState(false);
