@@ -115,7 +115,7 @@ export function HeroAurora() {
       <a
         href="#numeros"
         aria-label="Desça para explorar"
-        className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/60 transition-colors hover:text-white"
+        className="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/60 transition-colors hover:text-white sm:flex"
       >
         <span className="type-eyebrow flex items-center gap-1.5">
           <MapPin className="h-3.5 w-3.5" /> Explorar a rede

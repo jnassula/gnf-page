@@ -90,10 +90,22 @@ export function Header() {
       transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
       className="fixed inset-x-0 top-0 z-40 pt-3 sm:pt-5"
     >
+      {/* Scrim — esconde o conteúdo da hero que passa por baixo do header (só sobre a hero) */}
+      <div
+        aria-hidden="true"
+        className={cn(
+          "pointer-events-none absolute inset-x-0 top-0 -z-10 h-48 transition-opacity duration-[var(--dur-slow)] ease-[var(--ease-out)]",
+          overHero ? "opacity-100" : "opacity-0"
+        )}
+        style={{
+          background:
+            "linear-gradient(to bottom, oklch(0.1 0.018 163 / 1) 0%, oklch(0.1 0.018 163 / 1) 52%, oklch(0.1 0.018 163 / 0.82) 72%, transparent 100%)",
+        }}
+      />
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div
         className={cn(
-          "group flex w-full items-center justify-between gap-3 rounded-[var(--radius-2xl)] pl-5 pr-2 transition-all duration-[var(--dur-slow)] ease-[var(--ease-out)]",
+          "flex w-full items-center justify-between gap-3 rounded-[var(--radius-2xl)] pl-5 pr-2 transition-all duration-[var(--dur-slow)] ease-[var(--ease-out)]",
           overHero
             ? "border border-transparent bg-transparent py-3 shadow-none"
             : "glass-strong py-2 shadow-[var(--shadow-glass)]"
@@ -102,13 +114,7 @@ export function Header() {
         <Link
           href="/"
           aria-label="Grupo Nossa Farmácia — início"
-          className={cn(
-            "flex items-center gap-2.5 rounded-[var(--radius-sm)] transition-opacity duration-[var(--dur-base)] ease-[var(--ease-out)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]",
-            // Na hero a logo fica oculta; revela-se em hover do header ou em foco (teclado)
-            overHero
-              ? "opacity-0 pointer-events-none group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"
-              : "opacity-100"
-          )}
+          className="flex items-center gap-2.5 rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
         >
           {/* 3x do tamanho original (32→96) no desktop; reduzido em telemóvel p/ não transbordar */}
           <Logo
@@ -128,13 +134,7 @@ export function Header() {
         <div className="ml-auto flex items-center gap-1 xl:gap-3">
           <nav
             aria-label="Navegação principal"
-            className={cn(
-              "hidden items-center gap-1 transition-opacity duration-[var(--dur-base)] ease-[var(--ease-out)] xl:flex",
-              // Na hero o menu fica oculto; revela-se em hover do header ou em foco (teclado)
-              overHero
-                ? "opacity-0 pointer-events-none group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"
-                : "opacity-100"
-            )}
+            className="hidden items-center gap-1 xl:flex"
           >
             {navItems.map((item) => {
               const active = isActive(item);
