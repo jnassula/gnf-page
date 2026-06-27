@@ -3,6 +3,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 import { Quote } from "lucide-react";
+import { asset } from "@/lib/assetPath";
 
 const testimonials = [
   {
@@ -11,6 +12,7 @@ const testimonials = [
     author: "Dra. Helena Ramalho",
     role: "Direcção Técnica",
     farmacia: "Farmácia Central de Aveiro",
+    avatar: "/testimonials/helena.jpg",
   },
   {
     quote:
@@ -18,6 +20,7 @@ const testimonials = [
     author: "Dr. Miguel Antunes",
     role: "Farmacêutico Proprietário",
     farmacia: "Farmácia São Roque, Braga",
+    avatar: "/testimonials/miguel.jpg",
   },
   {
     quote:
@@ -25,6 +28,7 @@ const testimonials = [
     author: "Dra. Teresa Correia",
     role: "Direcção Técnica",
     farmacia: "Farmácia do Rossio, Lisboa",
+    avatar: "/testimonials/teresa.jpg",
   },
 ];
 
@@ -32,7 +36,7 @@ export function Testimonials() {
   return (
     <section
       aria-label="Testemunhos de farmácias associadas"
-      className="relative border-t border-border-subtle py-24 md:py-32 bg-surface-sunken"
+      className="relative py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
@@ -54,7 +58,7 @@ export function Testimonials() {
                 delay: i * 0.1,
                 ease: [0.22, 0.61, 0.36, 1],
               }}
-              className="group relative flex flex-col gap-6 rounded-[var(--radius-xl)] border border-border bg-surface p-7 md:p-8 shadow-[var(--shadow-card)] transition-all duration-[var(--dur-slow)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-lg)]"
+              className="glass group relative flex flex-col gap-6 rounded-[var(--radius-xl)] p-7 md:p-8 transition-all duration-[var(--dur-slow)] ease-[var(--ease-out)] hover:-translate-y-1"
             >
               <Quote
                 className="h-6 w-6 text-primary/50 shrink-0"
@@ -63,13 +67,24 @@ export function Testimonials() {
               <blockquote className="font-serif text-[22px] leading-[1.35] text-foreground tracking-[-0.01em]">
                 {t.quote}
               </blockquote>
-              <figcaption className="mt-auto pt-4 border-t border-border-subtle">
-                <div className="type-label text-foreground">{t.author}</div>
-                <div className="type-body-sm text-foreground-muted">
-                  {t.role}
-                </div>
-                <div className="type-mono mt-2 text-foreground-subtle">
-                  {t.farmacia}
+              <figcaption className="mt-auto flex items-center gap-3.5 border-t border-border-subtle pt-5">
+                <img
+                  src={asset(t.avatar)}
+                  alt={`Fotografia de ${t.author}`}
+                  width={48}
+                  height={48}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-12 w-12 shrink-0 rounded-full object-cover ring-1 ring-border"
+                />
+                <div className="min-w-0">
+                  <div className="type-label text-foreground">{t.author}</div>
+                  <div className="type-body-sm text-foreground-muted">
+                    {t.role}
+                  </div>
+                  <div className="type-mono mt-0.5 truncate text-foreground-subtle">
+                    {t.farmacia}
+                  </div>
                 </div>
               </figcaption>
             </motion.figure>

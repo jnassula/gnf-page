@@ -43,7 +43,7 @@ export function HowToJoin() {
     <section
       id="aderir"
       aria-label="Processo de adesão ao Grupo"
-      className="relative border-t border-border-subtle py-24 md:py-32"
+      className="relative py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">

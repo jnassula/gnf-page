@@ -369,6 +369,12 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Âncoras não ficam tapadas pelo header fixo ao navegar por #id */
+section[id],
+footer[id] {
+  scroll-margin-top: 6rem;
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -507,6 +513,203 @@ body {
   opacity: var(--noise-opacity);
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ============================================================================
+   AURORA GLASS — sistema visual da nova landing (glassmorphism + aurora mesh)
+   Aditivo: não altera tokens oficiais do NF DS. Compõe-se sobre os OKLCH
+   existentes (emerald / mint / spring) para coerência cromática.
+   ========================================================================== */
+
+:root {
+  /* Glass — superfícies translúcidas (modo claro: vidro branco sobre aurora) */
+  --glass-bg: oklch(1 0 0 / 0.55);
+  --glass-bg-strong: oklch(1 0 0 / 0.72);
+  --glass-border: oklch(1 0 0 / 0.65);
+  --glass-highlight: oklch(1 0 0 / 0.8);
+  --glass-blur: 16px;
+  --glass-saturate: 135%;
+
+  /* Glass escuro — para painéis sobre aurora profunda (hero, CTA) */
+  --glass-dark-bg: oklch(1 0 0 / 0.07);
+  --glass-dark-bg-strong: oklch(1 0 0 / 0.12);
+  --glass-dark-border: oklch(1 0 0 / 0.16);
+  --glass-dark-highlight: oklch(1 0 0 / 0.14);
+
+  --shadow-glass: 0 1px 1px 0 oklch(0.16 0.005 180 / 0.04),
+    0 12px 40px -12px oklch(0.43 0.105 163 / 0.18),
+    inset 0 1px 0 0 var(--glass-highlight);
+  --shadow-glass-dark: 0 20px 60px -16px oklch(0 0 0 / 0.55),
+    inset 0 1px 0 0 var(--glass-dark-highlight);
+
+  /* Aurora — fundo atmosférico vivo (emerald → mint → spring) */
+  --aurora-1: oklch(0.66 0.155 163 / 0.55);
+  --aurora-2: oklch(0.78 0.15 165 / 0.5);
+  --aurora-3: oklch(0.85 0.13 158 / 0.6);
+  --aurora-4: oklch(0.8 0.16 150 / 0.5);
+}
+
+.dark {
+  --glass-bg: oklch(0.22 0.01 180 / 0.55);
+  --glass-bg-strong: oklch(0.24 0.012 180 / 0.72);
+  --glass-border: oklch(1 0 0 / 0.12);
+  --glass-highlight: oklch(1 0 0 / 0.1);
+
+  --shadow-glass: 0 20px 60px -18px oklch(0 0 0 / 0.6),
+    inset 0 1px 0 0 var(--glass-highlight);
+
+  --aurora-1: oklch(0.66 0.155 163 / 0.4);
+  --aurora-2: oklch(0.52 0.13 163 / 0.45);
+  --aurora-3: oklch(0.43 0.105 163 / 0.5);
+  --aurora-4: oklch(0.74 0.16 150 / 0.35);
+}
+
+/* Vidro claro — superfície translúcida sobre a aurora */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+.glass-strong {
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) + 6px)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(calc(var(--glass-blur) + 6px)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+/* Vidro escuro — painéis sobre aurora profunda (texto branco) */
+.glass-dark {
+  background: var(--glass-dark-bg);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid var(--glass-dark-border);
+  box-shadow: var(--shadow-glass-dark);
+}
+.glass-dark-strong {
+  background: var(--glass-dark-bg-strong);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid var(--glass-dark-border);
+  box-shadow: var(--shadow-glass-dark);
+}
+
+/* Fallback quando backdrop-filter não é suportado: opacifica o vidro */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .glass { background: oklch(1 0 0 / 0.92); }
+  .glass-strong { background: oklch(1 0 0 / 0.96); }
+  .glass-dark { background: oklch(0.16 0.02 163 / 0.85); }
+  .glass-dark-strong { background: oklch(0.16 0.02 163 / 0.92); }
+}
+
+/* Aurora mesh — blobs radiais animados (transform/opacity only) */
+.aurora-field {
+  position: absolute;
+  inset: -25% -10%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: var(--radius-full);
+  will-change: transform;
+  mix-blend-mode: normal;
+}
+.aurora-blob-1 {
+  top: -5%; left: 0%;
+  width: 55vw; height: 55vw;
+  background: radial-gradient(circle at 50% 50%, var(--aurora-1), transparent 68%);
+  animation: aurora-drift-1 24s ease-in-out infinite;
+}
+.aurora-blob-2 {
+  top: -10%; right: -5%;
+  width: 50vw; height: 50vw;
+  background: radial-gradient(circle at 50% 50%, var(--aurora-2), transparent 66%);
+  animation: aurora-drift-2 30s ease-in-out infinite;
+}
+.aurora-blob-3 {
+  bottom: -15%; left: 25%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle at 50% 50%, var(--aurora-3), transparent 70%);
+  animation: aurora-drift-3 34s ease-in-out infinite;
+}
+.aurora-blob-4 {
+  bottom: 0%; right: 10%;
+  width: 42vw; height: 42vw;
+  background: radial-gradient(circle at 50% 50%, var(--aurora-4), transparent 66%);
+  animation: aurora-drift-1 28s ease-in-out infinite reverse;
+}
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(8%, 6%, 0) scale(1.12); }
+  66% { transform: translate3d(-6%, 10%, 0) scale(0.94); }
+}
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-10%, 8%, 0) scale(1.15); }
+}
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  40% { transform: translate3d(7%, -8%, 0) scale(1.1); }
+  75% { transform: translate3d(-8%, -4%, 0) scale(0.96); }
+}
+
+/* Grain sobre aurora — herda a noise-overlay mas mais subtil */
+.aurora-grain {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob { animation: none !important; }
+}
+
+/* Logo marquee — carrossel infinito de parceiros (transform only, 60fps) */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-left var(--marquee-dur, 48s) linear infinite;
+}
+.marquee-track.is-reverse {
+  animation-name: marquee-right;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
 }
 
 /* Radix data-state driven animations (substitui tailwindcss-animate) */

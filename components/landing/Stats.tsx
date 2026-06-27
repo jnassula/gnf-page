@@ -83,7 +83,7 @@ export function Stats() {
     <section
       id="numeros"
       aria-label="Números do Grupo Nossa Farmácia"
-      className="relative border-t border-border-subtle py-24 md:py-32"
+      className="relative py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex items-end justify-between gap-6 flex-wrap">
@@ -111,7 +111,7 @@ export function Stats() {
                 delay: i * 0.08,
                 ease: [0.22, 0.61, 0.36, 1],
               }}
-              className="flex flex-col gap-3 border-l border-border-subtle pl-6 md:pl-8"
+              className="glass flex flex-col gap-3 rounded-[var(--radius-xl)] p-6 md:p-7 transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] hover:-translate-y-1"
             >
               <dt className="type-eyebrow text-foreground-subtle">
                 {stat.label}

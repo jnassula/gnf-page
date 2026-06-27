@@ -72,7 +72,7 @@ export function Ecosystem() {
     <section
       id="tecnologia"
       aria-label="Ecossistema de tecnologia do Grupo"
-      className="relative border-t border-border-subtle py-24 md:py-32"
+      className="relative py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex items-end justify-between gap-6 flex-wrap">
@@ -106,9 +106,10 @@ export function Ecosystem() {
                   "group relative overflow-hidden rounded-[var(--radius-xl)] border p-6 md:p-7 flex flex-col gap-4",
                   "transition-all duration-[var(--dur-slow)] ease-[var(--ease-out)]",
                   "hover:-translate-y-0.5 hover:shadow-[var(--shadow-lg)]",
+                  "hover:-translate-y-1",
                   isFeature
-                    ? "md:col-span-4 md:row-span-2 bg-surface-inverse text-foreground-inverse border-transparent"
-                    : "md:col-span-2 bg-surface border-border hover:border-border-strong shadow-[var(--shadow-card)]"
+                    ? "md:col-span-4 md:row-span-2 bg-ink-950 text-foreground-inverse border-transparent"
+                    : "md:col-span-2 glass"
                 )}
               >
                 {isFeature && (

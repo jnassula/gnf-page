@@ -49,7 +49,7 @@ export function Benefits() {
     <section
       id="vantagens"
       aria-label="Vantagens de aderir ao Grupo"
-      className="relative border-t border-border-subtle py-24 md:py-32 bg-surface-sunken"
+      className="relative py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
@@ -75,7 +75,7 @@ export function Benefits() {
                 delay: (i % 3) * 0.08,
                 ease: [0.22, 0.61, 0.36, 1],
               }}
-              className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface p-6 transition-all duration-[var(--dur-slow)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-border-strong hover:shadow-[var(--shadow-md)]"
+              className="glass group relative overflow-hidden rounded-[var(--radius-lg)] p-6 transition-all duration-[var(--dur-slow)] ease-[var(--ease-out)] hover:-translate-y-1"
             >
               <span
                 aria-hidden="true"

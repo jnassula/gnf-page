@@ -4,24 +4,17 @@ import * as React from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AuroraBackground } from "./AuroraBackground";
 
 export function FinalCTA() {
   return (
     <section
       aria-label="Convite final"
-      className="relative isolate overflow-hidden bg-editorial text-foreground-inverse"
+      className="relative isolate overflow-hidden text-foreground-inverse"
     >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(70% 55% at 50% 0%, oklch(0.66 0.155 163 / 0.35), transparent 60%), radial-gradient(50% 40% at 10% 100%, oklch(0.43 0.105 163 / 0.3), transparent 70%)",
-        }}
-      />
-      <div className="noise-overlay" style={{ opacity: 0.06 }} />
+      <AuroraBackground variant="panel" tone="deep" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10 py-28 md:py-40">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 py-28 md:py-40">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -1,32 +1,36 @@
 import * as React from "react";
+import Link from "next/link";
 import { Linkedin, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 
+// Hrefs absolutos (/#secção e /servicos) para funcionarem a partir de qualquer página.
 const columns = [
   {
     title: "Grupo",
     items: [
-      { href: "#grupo", label: "Sobre" },
-      { href: "#numeros", label: "Em números" },
-      { href: "#aderir", label: "Como aderir" },
-      { href: "#candidatura", label: "Candidatura" },
+      { href: "/#grupo", label: "Sobre" },
+      { href: "/#numeros", label: "Em números" },
+      { href: "/servicos", label: "Serviços" },
+      { href: "/#parceiros", label: "Parceiros" },
+      { href: "/#aderir", label: "Como aderir" },
+      { href: "/#candidatura", label: "Candidatura" },
     ],
   },
   {
     title: "Tecnologia",
     items: [
-      { href: "#tecnologia", label: "Nossa AI" },
-      { href: "#tecnologia", label: "Addo Log" },
-      { href: "#tecnologia", label: "Plataforma de compras" },
-      { href: "#tecnologia", label: "Integrações ERP" },
+      { href: "/#tecnologia", label: "Nossa AI" },
+      { href: "/#tecnologia", label: "Addo Log" },
+      { href: "/#tecnologia", label: "Plataforma de compras" },
+      { href: "/#tecnologia", label: "Integrações ERP" },
     ],
   },
   {
     title: "Área reservada",
     items: [
-      { href: "#login-colaborador", label: "Colaboradores" },
-      { href: "#login-farmacia", label: "Farmácias" },
-      { href: "#login-fornecedor", label: "Fornecedores" },
+      { href: "/#login-colaborador", label: "Colaboradores" },
+      { href: "/#login-farmacia", label: "Farmácias" },
+      { href: "/#login-fornecedor", label: "Fornecedores" },
     ],
   },
 ];
@@ -97,12 +101,12 @@ export function Footer() {
                 <ul className="flex flex-col gap-2.5">
                   {col.items.map((item) => (
                     <li key={item.label}>
-                      <a
+                      <Link
                         href={item.href}
                         className="type-body-sm text-white/75 hover:text-white transition-colors"
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

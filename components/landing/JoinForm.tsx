@@ -97,7 +97,7 @@ export function JoinForm() {
     <section
       id="candidatura"
       aria-label="Formulário de candidatura de farmácias"
-      className="relative border-t border-border-subtle py-24 md:py-32"
+      className="relative py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-20">
@@ -145,7 +145,7 @@ export function JoinForm() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 0.61, 0.36, 1] }}
             onSubmit={handleSubmit}
             noValidate
-            className="relative rounded-[var(--radius-2xl)] border border-border bg-surface p-8 md:p-10 shadow-[var(--shadow-card)]"
+            className="glass-strong relative rounded-[var(--radius-2xl)] p-8 md:p-10"
           >
             <div
               aria-hidden="true"
