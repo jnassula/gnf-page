@@ -82,7 +82,7 @@ export function HowToJoin() {
                     duration: 0.55,
                     ease: [0.22, 0.61, 0.36, 1],
                   }}
-                  className="relative grid grid-cols-[40px_1fr] md:grid-cols-2 gap-6 items-start"
+                  className="relative md:grid md:grid-cols-2 md:gap-6 md:items-start"
                 >
                   <div className="relative md:col-span-2 md:grid md:grid-cols-2 md:gap-12">
                     <div
